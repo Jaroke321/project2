@@ -2,7 +2,7 @@
 
 <html>
 	<head>
-		<title>Login</title>
+		<title>Register</title>
 
 		<meta charset="utf-8">
     	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,16 +15,16 @@
 		{% with messages = get_flashed_messages(with_categories=true) %}
 			{% if messages %}
 				{% for categories, message in messages %}
-					<div align="center">
-						<p class="alert alert-danger" align="center">{{ message }}</p>
+					<div class="alert alert-{{ category }}">
+						{{ message }}
 					</div>
 				{% endfor %}
 			{% endif %}
 		{% endwith %}
 
 		<div class="main-form">
-			<p class="sign" align="center">Sign In</p>
-			<form class="form1" action="" method="post">
+			<p class="sign" align="center">Register</p>
+			<form action="" method="post">
 				{{ form.hidden_tag() }}
 				<div>
 					{{ form.username(class="un", placeholder="Username", align="center") }}
@@ -33,14 +33,18 @@
 					{{ form.password(class="pass", placeholder="Password", align="center")}}
 				</div>
 				<div>
-					{{ form.submit(class="submit", align="center") }}
+					{{ form.c_password(class="pass", placeholder="Confirm Password", align="center")}}
+				</div>
+				<div>
+					{{ form.submit(class="register-btn", align="center") }}
 				</div>
 
 				<p class="forgot" align="center">
-					Need An Account?
-					<a href="{{ url_for('register') }}">Register Here</a>
+					Already Have An Account?
+					<a href="{{ url_for('login') }}">Sign In</a>
 				</p>
 			</form>
 		</div>
+
 	</body>
 </html>

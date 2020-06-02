@@ -19,7 +19,22 @@ header {
 	justify-content: flex-end;
 	align-items: center;
 	padding: 10px 10%;
-	background-color: #24252A;
+	background-color: #0a0a0a;
+}
+
+body {
+	background-color: rgba(36, 37, 42, 0.9);
+}
+
+.container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-left: 18%;
+	margin-right: 18%;
+	margin-top: 20px;
+	height: 100%;
+	background-color: #ffffff;
 }
 
 .logo {
@@ -42,6 +57,10 @@ header {
 
 .nav-links li a:hover {
 	color: #0088a9;
+	border-bottom-style: solid;
+	border-bottom-width: 3px;
+	border-bottom-color: rgba(0, 126, 169, 1);
+	padding-bottom: 2px;
 }
 
 .accent-btn {
@@ -50,6 +69,15 @@ header {
 
 .accent-btn:hover {
 	background-color: rgba(235, 164, 52, 0.7);
+}
+
+.active {
+	font-weight: bold;
+	font-size: 16px;
+	border-bottom-style: solid;
+	border-bottom-width: 3px;
+	border-bottom-color: rgba(0, 126, 169, 1);
+	padding-bottom: 2px;
 }
 
 button {
@@ -80,7 +108,7 @@ button:hover {
 }
 
 .sign {
-	padding-top: 40px;
+	padding-top: 30px;
 	padding-bottom: 40px;
 	color: #ebebeb;
 	font-family: "Montserrat", sans-serif;
@@ -108,8 +136,30 @@ button:hover {
     font-family: 'Montserrat', sans-serif;
 }
 
-.form.form1 {
+form.form1 {
 	padding-top: 40px;
+}
+
+
+.register-btn {
+	cursor: pointer;
+    border-radius: 5em;
+    color: #fff;
+    background-color: rgba(235, 164, 52, 1);
+    border: 0;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    font-family: 'Montserrat', sans-serif;
+    margin-left: 34%;
+    font-size: 13px;
+    box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+    margin-top: 10px;
+}
+
+.register-btn:hover {
+	background-color: rgba(235, 164, 52, 0.8);
 }
 
 .pass {
@@ -159,9 +209,22 @@ button:hover {
 
 .forgot {
 	text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
-    color: #E1BEE7;
+    color: rgba(235, 164, 52, 1);
     padding-top: 15px;
 }
+
+.alert {
+	font-family: "Montserrat", sans-serif;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	width: 400px;
+	background-color: rgba(235, 164, 52, 1);
+}
+
+.alert-danger {
+	color: "red";
+}
+
 
 @media (max-width: 600px) {
 	.main {

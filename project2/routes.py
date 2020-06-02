@@ -27,7 +27,9 @@ def login():
 
         if user:
             login_user(user, remember=form.remember.data)
-            redirect(url_for('home'))
+            return redirect(url_for('home'))
+        else:  # User was not found
+            flash('Username or Password is Incorrect', 'danger')
 
     return render_template('login.html', js_file=js_file, form=form)
 
@@ -40,18 +42,39 @@ def home():
 
     js_file = url_for('static', filename='home.js')
 
-    return render_template('home.html', js_file=js_file)
+    return render_template('home.html', js_file=js_file, title="Channeler")
 
 
-@app.route("/register")
+@app.route("/register", methods=['GET', 'POST'])
 def register():
     """Register page so that new users can register an account"""
+
+    # Create the form
+    form = RegistrationForm()
+    # get the javascript file
+    js_file = url_for('static', filename='index.js')
+    # User has submitted the form
+    if form.validate_on_submit():
+        # get the values the user entered
+        username = form.username.data
+        password = form.password.data
+        # Create a new user
+        new_user = User(name=username, password=password)
+        # add user to DB
+        db.session.add(new_user)
+        db.session.commit()
+        flash('You Have Been Successfully Registered, Welcome!!')
+        # redirect to the login page
+        return redirect(url_for('login'))
+
+    return render_template('register.html', js_file=js_file, form=form)
 
 
 @app.route("/newChannel", methods=['GET', 'POST'])
 @login_required
 def newChannel():
     """Allow the user to create a new channel"""
+
 
 @app.route("/myChannels")
 @login_required
@@ -64,6 +87,5 @@ def myChannels():
 def logout():
     """Logs the current user out"""
 
-    logout_user()
-
-    return redirect(url_for('login'))
+    logout_user()  # Logout the current_user
+    return redirect(url_for('login'))  # Redirect the user to the login page
