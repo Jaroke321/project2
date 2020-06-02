@@ -46,3 +46,24 @@ def home():
 @app.route("/register")
 def register():
     """Register page so that new users can register an account"""
+
+
+@app.route("/newChannel", methods=['GET', 'POST'])
+@login_required
+def newChannel():
+    """Allow the user to create a new channel"""
+
+@app.route("/myChannels")
+@login_required
+def myChannels():
+    """Allows the user to see all of the channels that they have participated in"""
+
+
+@app.route("/logout")
+@login_required
+def logout():
+    """Logs the current user out"""
+
+    logout_user()
+
+    return redirect(url_for('login'))

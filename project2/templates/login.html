@@ -1,30 +1,44 @@
-{% extends "layout.html" %}
+<!DOCTYPE html>
 
-{% block body %}
-<form action="" method="post">
-	{{ form.hidden_tag() }}
-	<fieldset class="container form-group">
-		<legend class="border_bottom mb-4">Login</legend>
-		<div class="form-group">
-			{{ form.username.label(class="form-control-label") }}
-			{{ form.username(class="form-control form-control-lg") }}
+<html>
+	<head>
+		<title>{% block title %}{{ title }}{% endblock %}</title>
+
+		<meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+    	<link rel="stylesheet" type="text/css" href="static/main.css">
+
+		<script src="{{ js_file }}"></script>
+	</head>
+
+	<body class="main">
+		{% with messages = get_flashed_messages(with_categories=true) %}
+			{% if messages %}
+				{% for categories, message in messages %}
+					<div class="alert alert-{{ category }}">
+						{{ message }}
+					</div>
+				{% endfor %}
+			{% endif %}
+		{% endwith %}
+
+		<div class="main-form">
+			<p class="sign" align="center">Sign In</p>
+			<form class="form1" action="" method="post">
+				{{ form.hidden_tag() }}
+				<div>
+					{{ form.username(class="un", placeholder="Username", align="center") }}
+				</div>
+				<div>
+					{{ form.password(class="pass", placeholder="Password", align="center")}}
+				</div>
+				<div>
+					{{ form.submit(class="submit", align="center") }}
+				</div>
+
+				<p class="forgot" align="center"><a class="" href="{{ url_for('register') }}">Register Here</a></p>
+			</form>
 		</div>
-		<div class="form-group">
-			{{ form.password.label(class="form-control-label") }}
-			{{ form.password(class="form-control form-control-lg") }}
-		</div>
-		<div class="form-group">
-			{{ form.remember(class="form-check-input") }}
-			{{ form.remember.label(class="form-check-label") }}
-		</div>
-		<div class="form-group">
-			{{ form.submit(class="btn btn-primary") }}
-		</div>
-	</fieldset>
-</form>
-<div class="border-top pt-3">
-	<small class="text-muted">
-		Need An Account? <a class="ml-2" href="{{ url_for('register') }}">Sign Up Now</a>
-	</small>
-</div>
-{% endblock %}
+
+	</body>
+</html>
