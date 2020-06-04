@@ -1,5 +1,35 @@
-{% extends "layout.hmtl" %}
+{% extends "layout.html" %}
+
+{% block heading %}
+	<header>
+		<img class="logo" src="static/logo.png" width="120px">
+		<nav>
+			<ul class="nav-links">
+				<li><a href="{{ url_for('home') }}">Home</a></li>
+				<li><a href="{{ url_for('myChannels') }}">My Channels</a></li>
+			</ul>
+		</nav>
+		<a href="{{ url_for('newChannel') }}"><button>New Channel</button></a>
+		<a href="{{ url_for('logout') }}"><button class="accent-btn">Logout</button></a>
+	</header>
+{% endblock %}
 
 {% block body %}
+<div class="channel-form">
+	<p class="sign" align="center">Create A New Channel</p>
+	<form>
+		{{ form.hidden_tag() }}
+		<div>
+			{{ form.channelname(class="cn", placeholder="Name of the Channel", align="Center") }}
+		</div>
+		<div class="form-section" align="center">
+			<span class="text-white">Is this channel public or private?</span>
+			{{ form.is_public(class="spacer select-field") }}
+		</div>
+		<div>
+			{{ form.create(class="create-btn", align="center")}}
+		</div>
+	</form>
+</div>
 
 {% endblock %}

@@ -1,5 +1,5 @@
 from project2 import app, db
-from flask import render_template, url_for, redirect, flash, session, request
+from flask import render_template, url_for, redirect, flash, request
 from flask_login import login_user, logout_user, login_required, current_user
 from project2.forms import LoginForm, RegistrationForm, NewChannelForm
 from project2.models import User, Follow, Post, Channel
@@ -18,7 +18,7 @@ def login():
     # Create the Login Form
     form = LoginForm()
     # Get the js file
-    js_file = url_for('static', filename='index.js')
+    js_file = url_for('static', filename='login.js')
     # User has submitted their credentials
     if form.validate_on_submit():
         # Get the name and password of the user
@@ -39,10 +39,10 @@ def login():
 @app.route("/home")
 @login_required
 def home():
-    """Main Page after the login that shows all of 
+    """Main Page after the login that shows all of
     the different message channels"""
 
-    js_file = url_for('static', filename='home.js') # Get the correct js file
+    js_file = url_for('static', filename='home.js')  # Get the correct js file
     # Direct the user to the home page
     return render_template('home.html', js_file=js_file, title="Channeler")
 
@@ -54,7 +54,7 @@ def register():
     # Create the form
     form = RegistrationForm()
     # get the javascript file
-    js_file = url_for('static', filename='index.js')
+    js_file = url_for('static', filename='register.js')
     # User has submitted the form
     if form.validate_on_submit():
         # get the values the user entered
@@ -77,23 +77,26 @@ def register():
 def newChannel():
     """Allow the user to create a new channel"""
 
-    form = NewChannelForm().  # Create a new channel form
+    form = NewChannelForm()  # Create a new channel form
+    js_file = url_for('static', filename='createChannel.js')  # Get the correct JS file
 
     # Validate the incoming form
     if form.validate_on_submit():
         chan_name = form.channel_name.data
         # emit the new channel to users on the home page
-        createChannel()
+        broadcastChannel()
         # Send the user to the new channels page
         redirect(url_for('channel', chan_name=chan_name))
     # Render the template for a GET request
-    return render_template('newChannel.html', form=form)
+    return render_template('newChannel.html', form=form, js_file=js_file)
 
 
 @app.route("/myChannels")
 @login_required
 def myChannels():
     """Allows the user to see all of the channels that they have participated in"""
+
+    return render_template('myChannels.html')
 
 
 @app.route("/logout")
@@ -105,7 +108,7 @@ def logout():
     return redirect(url_for('login'))  # Redirect the user to the login page
 
 
-def createChannel():
+def broadcastChannel():
     """When a new channel is being created, this method will process the request
     and when it is complete emit it back to all of the users in real time."""
 

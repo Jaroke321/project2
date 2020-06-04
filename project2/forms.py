@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, SelectField
 from wtforms.validators import DataRequired, Length, EqualTo
 
 
@@ -21,4 +21,10 @@ class RegistrationForm(FlaskForm):
                                validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Register')
 
+
 class NewChannelForm(FlaskForm):
+    channelname = StringField('Channel Name',
+                              validators=[DataRequired(), Length(min=2, max=30)])
+    is_public = SelectField('Public or Private',
+                            choices=[('public', 'Public'), ('private', 'Private')])
+    create = SubmitField('Create Channel')
