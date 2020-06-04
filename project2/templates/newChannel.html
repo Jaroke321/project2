@@ -17,7 +17,7 @@
 {% block body %}
 <div class="channel-form">
 	<p class="sign" align="center">Create A New Channel</p>
-	<form>
+	<form action="", method="post">
 		{{ form.hidden_tag() }}
 		<div>
 			{{ form.channelname(class="cn", placeholder="Name of the Channel", align="Center") }}

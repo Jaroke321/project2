@@ -3,7 +3,6 @@ from flask import render_template, url_for, redirect, flash, request
 from flask_login import login_user, logout_user, login_required, current_user
 from project2.forms import LoginForm, RegistrationForm, NewChannelForm
 from project2.models import User, Follow, Post, Channel
-from flask_socketio import SocketIO, emit
 
 
 @app.route("/", methods=['GET', 'POST'])
@@ -43,8 +42,10 @@ def home():
     the different message channels"""
 
     js_file = url_for('static', filename='home.js')  # Get the correct js file
+
+    channels = Channel.query.all()
     # Direct the user to the home page
-    return render_template('home.html', js_file=js_file, title="Channeler")
+    return render_template('home.html', js_file=js_file, title="Channeler", channels=channels)
 
 
 @app.route("/register", methods=['GET', 'POST'])
@@ -82,17 +83,27 @@ def newChannel():
 
     # Validate the incoming form
     if form.validate_on_submit():
-        chan_name = form.channel_name.data
+        chan_name = form.channelname.data
         # emit the new channel to users on the home page
-        broadcastChannel()
+        # flash(f'new channel with name {chan_name}')
+
+        channel = Channel(channel_name=chan_name, admin_id=current_user.id)
+        db.session.add(channel)
+        db.session.commit()
+
+        broadcastChannel(chan_name)
         # Send the user to the new channels page
-        redirect(url_for('channel', chan_name=chan_name))
+        # redirect(url_for('channel', chan_name=chan_name))
     # Render the template for a GET request
     return render_template('newChannel.html', form=form, js_file=js_file)
 
 
+# @app.route("/channel/<String:name>")
+# @login_required
+# def channel(name):
+
+
 @app.route("/myChannels")
-@login_required
 def myChannels():
     """Allows the user to see all of the channels that they have participated in"""
 
@@ -108,12 +119,11 @@ def logout():
     return redirect(url_for('login'))  # Redirect the user to the login page
 
 
-def broadcastChannel():
+
+
+def broadcastChannel(chan_name):
     """When a new channel is being created, this method will process the request
     and when it is complete emit it back to all of the users in real time."""
 
     # TODO!! This is incomplete, the javascript will check the data and then
     # here is where the new channel will be added to the DB
-
-    channels = Channel.query.all()
-    emit("new channel", channels, broadcat=True)

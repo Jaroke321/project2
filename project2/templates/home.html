@@ -1,21 +1,48 @@
-{% extends "layout.html" %}
+<!DOCTYPE html>
 
-{% block heading %}
-	<header>
-		<img class="logo" src="static/logo.png" width="120px">
-		<nav>
-			<ul class="nav-links">
-				<li><a class="active" href="{{ url_for('home') }}">Home</a></li>
-				<li><a href="{{ url_for('myChannels') }}">My Channels</a></li>
-			</ul>
-		</nav>
-		<a href="{{ url_for('newChannel') }}"><button>New Channel</button></a>
-		<a href="{{ url_for('logout') }}"><button class="accent-btn">Logout</button></a>
-	</header>
-{% endblock %}
+<html>
+	<head>
+		<title>{% block title %}{{ title }}{% endblock %}</title>
 
-{% block body %}
-<main class="container">
-		<p>Hello</p>
-</main>
-{% endblock %}
+		<meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+    	<link rel="stylesheet" type="text/css" href="static/main.css">
+
+    	<script src="../{{ js_file}} "></script>
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+
+		<script id="channel-item" type="text/x-handlebars-template">
+			<div class="channel-item">
+				{% raw -%}
+				<div class="border-btm">
+					<span class="channel-title">{{ channel_name }}</span>
+					<span class="text-secondary spacer-lg">Followers: 0</span>
+				</div>
+				{%- endraw %}
+			</div>			
+		</script>
+	</head>
+	<body>
+		<header>
+			<img class="logo" src="static/logo.png" width="120px">
+			<nav>
+				<ul class="nav-links">
+					<li><a class="active" href="{{ url_for('home') }}">Home</a></li>
+					<li><a href="{{ url_for('myChannels') }}">My Channels</a></li>
+				</ul>
+			</nav>
+			<a href="{{ url_for('newChannel') }}"><button>New Channel</button></a>
+			<a href="{{ url_for('logout') }}"><button class="accent-btn">Logout</button></a>
+		</header>
+		<main class="container">
+			{% for ch in channels %}
+				<div class="channel-item">
+					<div class="border-btm">
+						<span class="channel-title">{{ ch.channel_name }}</span>
+						<span class="text-secondary spacer-lg">Followers: 0</span>
+					</div>
+				</div>
+			{% endfor %}
+		</main>
+	</body>
+</html>
