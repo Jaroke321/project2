@@ -13,12 +13,14 @@
 
 		<script id="channel-item" type="text/x-handlebars-template">
 			<div class="channel-item">
-				{% raw -%}
 				<div class="border-btm">
-					<span class="channel-title">{{ channel_name }}</span>
+					<span class="channel-title">
+						{% raw -%}
+							{{ channel_name }}
+						{%- endraw %}
+					</span>
 					<span class="text-secondary spacer-lg">Followers: 0</span>
 				</div>
-				{%- endraw %}
 			</div>			
 		</script>
 	</head>
@@ -34,15 +36,14 @@
 			<a href="{{ url_for('newChannel') }}"><button>New Channel</button></a>
 			<a href="{{ url_for('logout') }}"><button class="accent-btn">Logout</button></a>
 		</header>
+
 		<main class="container">
-			{% for ch in channels %}
-				<div class="channel-item">
-					<div class="border-btm">
-						<span class="channel-title">{{ ch.channel_name }}</span>
-						<span class="text-secondary spacer-lg">Followers: 0</span>
-					</div>
-				</div>
-			{% endfor %}
+			<p id="testing">
+				
+			</p>
+			<div id="channels">
+				
+			</div>
 		</main>
 	</body>
 </html>

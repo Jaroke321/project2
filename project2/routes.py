@@ -1,8 +1,10 @@
 from project2 import app, db
-from flask import render_template, url_for, redirect, flash, request
+from flask import render_template, url_for, redirect, flash, request, jsonify
 from flask_login import login_user, logout_user, login_required, current_user
 from project2.forms import LoginForm, RegistrationForm, NewChannelForm
 from project2.models import User, Follow, Post, Channel
+
+import time
 
 
 @app.route("/", methods=['GET', 'POST'])
@@ -91,7 +93,7 @@ def newChannel():
         db.session.add(channel)
         db.session.commit()
 
-        broadcastChannel(chan_name)
+        # broadcastChannel(chan_name)
         # Send the user to the new channels page
         # redirect(url_for('channel', chan_name=chan_name))
     # Render the template for a GET request
@@ -119,11 +121,20 @@ def logout():
     return redirect(url_for('login'))  # Redirect the user to the login page
 
 
+@app.route("/channels", methods=['POST'])
+def channels():
+    """This route is used by the home page so that the user
+    can retrieve all the correct channels in increments of 20"""
 
+    # Get the offset and the limit for the query
+    offset = int(request.form.get("offset") or 0)
+    limit = int(request.form.get("limit"))
 
-def broadcastChannel(chan_name):
-    """When a new channel is being created, this method will process the request
-    and when it is complete emit it back to all of the users in real time."""
+    # Query the DB for the channels with offset and limit
+    data = [ch.channel_name for ch in Channel.query.offset(offset).limit(limit).all()]
 
-    # TODO!! This is incomplete, the javascript will check the data and then
-    # here is where the new channel will be added to the DB
+    # Return the JSON data
+    if data:
+        return jsonify(data)
+    else:
+        return None
