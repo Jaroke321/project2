@@ -26,9 +26,7 @@ function load() {
 	// Run this code when the data comes back from the server
 	request.onload = () => {
 		const data = JSON.parse(request.responseText);  // Parse the incoming data
-		for(i=0; i < data.length; i++) {
-			add_channel(data[i])
-		}  // for each object coming in run the add_channel function
+		data.forEach(add_channel);
 	};
 
 	// Create a new form and append our offset and limit values

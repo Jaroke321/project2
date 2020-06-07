@@ -29,18 +29,15 @@
 			<img class="logo" src="static/logo.png" width="120px">
 			<nav>
 				<ul class="nav-links">
-					<li><a class="active" href="{{ url_for('home') }}">Home</a></li>
+					<li><a href="{{ url_for('home') }}">Home</a></li>
 					<li><a href="{{ url_for('myChannels') }}">My Channels</a></li>
+					<li><a href="{{ url_for('newChannel') }}">Create Channel</a></li>
+					<li><a href="{{ url_for('logout') }}">Logout</a></li>
 				</ul>
 			</nav>
-			<a href="{{ url_for('newChannel') }}"><button>New Channel</button></a>
-			<a href="{{ url_for('logout') }}"><button class="accent-btn">Logout</button></a>
 		</header>
 
-		<main class="container">
-			<p id="testing">
-				
-			</p>
+		<main>
 			<div id="channels">
 				
 			</div>

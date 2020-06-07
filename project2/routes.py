@@ -134,7 +134,4 @@ def channels():
     data = [ch.channel_name for ch in Channel.query.offset(offset).limit(limit).all()]
 
     # Return the JSON data
-    if data:
-        return jsonify(data)
-    else:
-        return None
+    return jsonify(data)
