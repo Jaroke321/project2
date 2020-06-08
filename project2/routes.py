@@ -17,11 +17,11 @@ def login():
         return redirect(url_for('home'))
 
     # Create the Login Form
-    form = LoginForm()
+    #form = LoginForm()
     # Get the js file
     js_file = url_for('static', filename='login.js')
     # User has submitted their credentials
-    if form.validate_on_submit():
+    if request.method == 'POST':
         # Get the name and password of the user
         name = request.form.get("username")
         password = request.form.get("password")
@@ -29,12 +29,13 @@ def login():
         user = User.query.filter_by(name=name, password=password).first()
         # Sign the user in if username and password are correct
         if user:
-            login_user(user, remember=form.remember.data)
+            login_user(user)
             return redirect(url_for('home'))
         else:  # User was not found
             flash('Username or Password is Incorrect', 'danger')
+            return render_template('login.html', js_file=js_file), 400
     # Render the sign in page
-    return render_template('login.html', js_file=js_file, form=form)
+    return render_template('login.html', js_file=js_file)
 
 
 @app.route("/home")
@@ -59,7 +60,7 @@ def register():
     # get the javascript file
     js_file = url_for('static', filename='register.js')
     # User has submitted the form
-    if form.validate_on_submit():
+    if request.method == 'POST':
         # get the values the user entered
         username = form.username.data
         password = form.password.data

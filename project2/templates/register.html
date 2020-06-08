@@ -8,7 +8,7 @@
     	<meta name="viewport" content="width=device-width, initial-scale=1">
     	<link rel="stylesheet" type="text/css" href="static/main.css">
 
-		<script src="{{ js_file }}"></script>
+		<script src="../{{ js_file }}"></script>
 	</head>
 
 	<body class="main">
@@ -25,23 +25,22 @@
 		<div class="main-form">
 			<p class="sign" align="center">Register</p>
 			<form action="" method="post">
-				{{ form.hidden_tag() }}
 				<div>
-					{{ form.username(class="un", placeholder="Username", align="center") }}
+					<input class="un" type="text" name="username" autocomplete="off" placeholder="Username" align="center" required>
 				</div>
 				<div>
-					{{ form.password(class="pass", placeholder="Password", align="center")}}
+					<input id="pass" class="pass" type="password" name="Password" placeholder="Password" align="center" required>
 				</div>
 				<div>
-					{{ form.c_password(class="pass", placeholder="Confirm Password", align="center")}}
+					<input id="cPass" class="pass" type="password" name="Password" placeholder="Retype Password" align="center" required>
 				</div>
 				<div>
-					{{ form.submit(class="register-btn", align="center") }}
+					<button id="submit" class="register-btn">Register</button>
 				</div>
 
 				<p class="forgot" align="center">
 					Already Have An Account?
-					<a href="{{ url_for('login') }}">Sign In</a>
+					<a class="link" href="{{ url_for('login') }}">Sign In</a>
 				</p>
 			</form>
 		</div>

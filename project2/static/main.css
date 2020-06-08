@@ -6,7 +6,7 @@
 	padding: 0;
 }
 
-li, a, button {
+li, a {
 	font-family: "Montserrat", sans-serif;
 	font-weight: 500;
 	font-size: 14px;
@@ -20,13 +20,19 @@ header {
 	align-items: center;
 	padding: 10px 3%;
 	background-color: rgba(255, 255, 255, 0);
-	margin-bottom: 20px;
 	box-shadow: 1px 1px 3px 1px rgba(30, 30, 30, 0.25); 
+	position: fixed;
+	top: 0px;
+	width: 100%;
 }
 
 body {
 	background-color: #4158D0;
 	background-image: linear-gradient(to right, #aa4b6b, #6b6b83, #3b8d99);
+}
+
+main {
+	margin-top: 75px;
 }
 
 .container {
@@ -102,16 +108,12 @@ body {
 	margin-left: 20px;
 }
 
-button:hover {
-	background-color: rgba(0, 126, 169, 0.7);
-}
-
 .main {
 	background-color: rgba(0, 126, 169, 1);
 }
 
 .main-form {
-	background-color: rgba(36, 37, 42, 0.9);
+	background-color: rgba(255, 255, 255, 0.9);
 	width: 400px;
 	height: 400px;
 	margin: 7em auto;
@@ -121,13 +123,11 @@ button:hover {
 
 .channel-form {
 	background-color: rgba(0, 0, 0, 0.7);
-	margin: 25px auto;
+	margin: auto;
+	margin-top: 100px;
 	width: 500px;
 	height: 400px;
 	border-radius: 0.5em;
-	border: 1px solid;
-	border-color: rgba(0, 126, 169, 0);
-	box-shadow: 4px 4px 4px 4px rgba(0, 126, 169, 0.24);
 }
 
 .channel-title {
@@ -175,7 +175,7 @@ button:hover {
 .sign {
 	padding-top: 30px;
 	padding-bottom: 40px;
-	color: #ebebeb;
+	color: rgba(0, 0, 0, 0.9);
 	font-family: "Montserrat", sans-serif;
 	font-weight: bold;
 	font-size: 24px;
@@ -187,7 +187,8 @@ button:hover {
     font-weight: 700;
     font-size: 14px;
     letter-spacing: 1px;
-    background: rgba(255, 255, 255, 1);
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
     padding: 10px 25px 10px 15px;
     border: none;
     border-radius: 20px;
@@ -287,6 +288,7 @@ form.form1 {
     text-align: center;
     margin-bottom: 27px;
     font-family: 'Montserrat', sans-serif;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
 }
 
 .un:focus, .pass:focus {
@@ -307,7 +309,7 @@ form.form1 {
     margin-left: 35%;
     font-size: 13px;
     box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
-    margin-top: 30px;
+    margin-top: 10px;
 }
 
 .submit:hover {
@@ -316,12 +318,31 @@ form.form1 {
 
 .forgot {
 	text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
-    color: rgba(235, 164, 52, 1);
+    color: rgba(0, 0, 0, 1);
     padding-top: 15px;
 }
 
+.link {
+	color: rgba(0, 0, 0, 1);
+}
+
+.disabled-btn {
+    border-radius: 5em;
+    color: #fff;
+    background-color: rgba(35, 35, 35, 0.8);
+    border: 0;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    font-family: 'Montserrat', sans-serif;
+    margin-left: 35%;
+    font-size: 13px;
+    box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+    margin-top: 10px;
+}
+
 .channel-item {
-	cursor: pointer;
 	border-radius: 4px;
 	background-color: rgba(235, 235, 235, 1);
 	font-family: 'Montserrat', sans-serif;
@@ -342,11 +363,11 @@ form.form1 {
 	padding-top: 10px;
 	padding-bottom: 10px;
 	width: 400px;
-	background-color: rgba(235, 164, 52, 1);
+	color: #ffffff;
 }
 
 .alert-danger {
-	background-color: "red";
+	background-color: rgba(50, 135, 168, 0.7);
 }
 
 @media (max-width: 600px) {

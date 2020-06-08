@@ -38,8 +38,6 @@ function load() {
 	request.send(data);
 };
 
-// Create the channel template
-const channel_template = Handlebars.compile(document.querySelector('#channel-item').innerHTML);
 function add_channel(name) {
 
 	const channel = document.createElement('div');

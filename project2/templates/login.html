@@ -8,7 +8,7 @@
     	<meta name="viewport" content="width=device-width, initial-scale=1">
     	<link rel="stylesheet" type="text/css" href="static/main.css">
 
-		<script src="{{ js_file }}"></script>
+		<script src="../{{ js_file }}"></script>
 	</head>
 
 	<body class="main">
@@ -25,20 +25,18 @@
 		<div class="main-form">
 			<p class="sign" align="center">Sign In</p>
 			<form class="form1" action="" method="post">
-				{{ form.hidden_tag() }}
 				<div>
-					{{ form.username(class="un", placeholder="Username", align="center") }}
+					<input class="un" autocomplete="off" type="text" name="username" placeholder="Username" align="center" required>
 				</div>
 				<div>
-					{{ form.password(class="pass", placeholder="Password", align="center")}}
+					<input class="pass" type="password" name="password" placeholder="Password" align="center" required>
 				</div>
 				<div>
-					{{ form.submit(class="submit", align="center") }}
+					<button id="submit" class="submit">Login</button>
 				</div>
-
 				<p class="forgot" align="center">
 					Need An Account?
-					<a href="{{ url_for('register') }}">Register Here</a>
+					<a class="link" href="{{ url_for('register') }}">Register Here</a>
 				</p>
 			</form>
 		</div>
