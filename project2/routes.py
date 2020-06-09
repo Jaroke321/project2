@@ -16,8 +16,6 @@ def login():
     if current_user.is_authenticated:
         return redirect(url_for('home'))
 
-    # Create the Login Form
-    #form = LoginForm()
     # Get the js file
     js_file = url_for('static', filename='login.js')
     # User has submitted their credentials
@@ -55,15 +53,13 @@ def home():
 def register():
     """Register page so that new users can register an account"""
 
-    # Create the form
-    form = RegistrationForm()
     # get the javascript file
     js_file = url_for('static', filename='register.js')
     # User has submitted the form
     if request.method == 'POST':
         # get the values the user entered
-        username = form.username.data
-        password = form.password.data
+        username = request.form.get()
+        password = request.form.get()
         # Create a new user
         new_user = User(name=username, password=password)
         # add user to DB
@@ -73,7 +69,7 @@ def register():
         # redirect to the login page
         return redirect(url_for('login'))
 
-    return render_template('register.html', js_file=js_file, form=form)
+    return render_template('register.html', js_file=js_file)
 
 
 @app.route("/newChannel", methods=['GET', 'POST'])
@@ -81,24 +77,24 @@ def register():
 def newChannel():
     """Allow the user to create a new channel"""
 
-    form = NewChannelForm()  # Create a new channel form
     js_file = url_for('static', filename='createChannel.js')  # Get the correct JS file
 
     # Validate the incoming form
-    if form.validate_on_submit():
-        chan_name = form.channelname.data
-        # emit the new channel to users on the home page
-        # flash(f'new channel with name {chan_name}')
+    if request.method == 'POST':
+        # Get the channel name thatthe user is submitting
+        chan_name = request.form.get('channel_name')
+        # Query to see if the channel name already exists
+        chan = Channel.query.filter_by(channel_name=chan_name).first()
 
-        channel = Channel(channel_name=chan_name, admin_id=current_user.id)
-        db.session.add(channel)
-        db.session.commit()
+        # Add new channel to the DB if it does not already exist
+        if not chan:
+            channel = Channel(channel_name=chan_name, admin_id=current_user.id)
+            db.session.add(channel)
+            db.session.commit()
 
-        # broadcastChannel(chan_name)
-        # Send the user to the new channels page
-        # redirect(url_for('channel', chan_name=chan_name))
+        redirect(url_for('home'))
     # Render the template for a GET request
-    return render_template('newChannel.html', form=form, js_file=js_file)
+    return render_template('newChannel.html', js_file=js_file)
 
 
 # @app.route("/channel/<String:name>")

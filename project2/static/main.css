@@ -10,7 +10,7 @@ li, a {
 	font-family: "Montserrat", sans-serif;
 	font-weight: 500;
 	font-size: 14px;
-	color: #edf0f1;
+	color: rgba(0, 0, 0, 1);
 	text-decoration: none;
 }
 
@@ -27,9 +27,10 @@ header {
 }
 
 body {
-	background-color: #4158D0;
-	background-image: linear-gradient(to right, #aa4b6b, #6b6b83, #3b8d99);
-}
+  background: #355c7d; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #355c7d, #6c5b7b, #c06c84); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #355c7d, #6c5b7b, #c06c84);
+  }
 
 main {
 	margin-top: 75px;
@@ -63,10 +64,13 @@ main {
 }
 
 .nav-links li a:hover {
-	color: #0088a9;
+	color: rgba(0, 0, 0, 1);
 	border-bottom-style: solid;
-	border-bottom-width: 3px;
-	border-bottom-color: rgba(0, 126, 169, 1);
+	border-bottom-width: 2px;
+	border-bottom-color: rgba(0, 0, 0, 1);
+	border-top-style: solid;
+	border-top-width: 2px;
+	border-top-color: rgba(0, 0, 0, 1);
 	padding-bottom: 2px;
 }
 
@@ -122,12 +126,13 @@ main {
 }
 
 .channel-form {
-	background-color: rgba(0, 0, 0, 0.7);
+	background-color: rgba(255, 255, 255, 0.9);
 	margin: auto;
 	margin-top: 100px;
 	width: 500px;
-	height: 400px;
+	height: 500px;
 	border-radius: 0.5em;
+	box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.25);
 }
 
 .channel-title {
@@ -146,6 +151,12 @@ main {
 
 .text-white {
 	color: #ffffff;
+	font-size: 14px;
+	font-family: 'Montserrat', sans-serif;
+}
+
+.text-dark {
+	color: rgba(0, 0, 0, 0.9);
 	font-size: 14px;
 	font-family: 'Montserrat', sans-serif;
 }
@@ -190,7 +201,6 @@ main {
     background: rgba(255, 255, 255, 0.9);
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
     padding: 10px 25px 10px 15px;
-    border: none;
     border-radius: 20px;
     outline: none;
     box-sizing: border-box;
@@ -205,17 +215,17 @@ main {
 .cn {
 	width: 76%;
 	font-family: 'Montserrat', sans-serif;
-	font-size: 16px;
-	font-weight: 500;
+	font-size: 18px;
+	font-weight: 700;
 	margin-bottom: 27px;
 	margin-left: 52px;
 	text-align: center;
 	box-sizing: border-box;
 	padding: 10px 25px 10px 15px;
-	border: 1px solid rgba(0, 0, 0, 0.8);
+	border: 2px solid rgba(0, 0, 0, 0.02);
 	border-radius: 15px;
-	background-color: rgba(255, 255, 255, 0.8);
-
+	background: rgba(255, 255, 255, 0.9);
+	box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
 }
 
 form.form1 {
@@ -250,7 +260,7 @@ form.form1 {
 	background-color: rgba(0, 126, 169, 1);
 	font-family: 'Montserrat', sans-serif;
 	padding: 10px 40px 10px 40px;
-	margin-top: 15%;
+	margin-top: 20%;
 	margin-left: 31%;
 	color: #ffffff;
 	border: 0;
@@ -343,19 +353,59 @@ form.form1 {
 }
 
 .channel-item {
+	cursor: pointer;
 	border-radius: 4px;
-	background-color: rgba(235, 235, 235, 1);
+	background-color: rgba(255, 255, 255, 0.9);
 	font-family: 'Montserrat', sans-serif;
-	margin-left: 20%;
-	margin-right: 20%;
 	margin-bottom: 1px;
 	padding-top: 10px;
 	padding-bottom: 70px;
-	transition: all 0.8s;
+	transition: all 0.3s ease-in;
+	width: 68%;
+}
+
+.side-bar {
+	float: left;
+	height: 400px;
+	margin-left: 1%;
+	background-color: rgba(255, 255, 255, 0.9);
+	border-radius: 4px;
+	font-family: 'Montserrat', sans-serif;
+	position: fixed;
+	top: 75px;
+	width: 20%;
+}
+
+.search-bar {
+	border-radius: 10px;
+	font-family: 'Montserrat', sans-serif;
+	margin-bottom: 10px;
+	margin-left: 22.5%; 
+	background-color: rgba(0, 0, 0, 0.25);
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	width: 55%;
+}
+
+.search-input {
+	color: rgb(38, 50, 56);
+	padding: 10px 20px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	width: 85%;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 700;
+    font-size: 14px;
+    border-radius: 10px;
+    border: none;
+    text-align: center;
+}
+
+.channels {
+	margin-left: 22.5%;
 }
 
 .channel-item:hover {
-	transform: scale(1.05);
+	transform: translateX(10px);
 }
 
 .alert {
@@ -373,5 +423,24 @@ form.form1 {
 @media (max-width: 600px) {
 	.main {
 		border-radius: 0px;
+	}
+
+	div.side-bar {
+		display: none;
+	}
+
+	div.channels {
+		margin-left: 10%;
+		margin-right: 10%;
+	}
+
+	.channel-item {
+		width: 100%;
+	}
+
+	.search-bar {
+		width: 80%;
+		margin-right: 10%;
+		margin-left: 10%;
 	}
 }

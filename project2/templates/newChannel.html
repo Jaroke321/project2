@@ -18,16 +18,18 @@
 <div class="channel-form">
 	<p class="sign" align="center">Create A New Channel</p>
 	<form action="", method="post">
-		{{ form.hidden_tag() }}
 		<div>
-			{{ form.channelname(class="cn", placeholder="Name of the Channel", align="Center") }}
+			<input class="cn" placeholder="New Channel Name" type="text" name="class_name" align="center" required>
 		</div>
 		<div class="form-section" align="center">
-			<span class="text-white">Is this channel public or private?</span>
-			{{ form.is_public(class="spacer select-field") }}
+			<span class="text-dark">Is this channel public or private?</span>
+			<select id="channel-type" class="spacer select-field" name="channel-type">
+				<option value="public">Public</option>
+				<option value="private">Private</option>
+			</select>
 		</div>
 		<div>
-			{{ form.create(class="create-btn", align="center")}}
+			<button class="create-btn" align="center">Create Channel</button>
 		</div>
 	</form>
 </div>
