@@ -352,6 +352,20 @@ form.form1 {
     margin-top: 10px;
 }
 
+.disabled-chan-btn {
+	border-radius: 15px;
+	background-color: rgba(35, 35, 35, 0.8);
+	font-family: 'Montserrat', sans-serif;
+	padding: 10px 40px 10px 40px;
+	margin-top: 20%;
+	margin-left: 31%;
+	color: #ffffff;
+	border: 0;
+	font-size: 15px;
+	padding-top: 13px;
+	padding-bottom: 13px;
+}
+
 .channel-item {
 	cursor: pointer;
 	border-radius: 4px;

@@ -3,6 +3,7 @@ from flask import render_template, url_for, redirect, flash, request, jsonify
 from flask_login import login_user, logout_user, login_required, current_user
 from project2.forms import LoginForm, RegistrationForm, NewChannelForm
 from project2.models import User, Follow, Post, Channel
+from sqlalchemy import *
 
 import time
 
@@ -60,14 +61,20 @@ def register():
         # get the values the user entered
         username = request.form.get()
         password = request.form.get()
-        # Create a new user
-        new_user = User(name=username, password=password)
-        # add user to DB
-        db.session.add(new_user)
-        db.session.commit()
-        flash('You Have Been Successfully Registered, Welcome!!')
-        # redirect to the login page
-        return redirect(url_for('login'))
+
+        # Query to see if the user already exists
+        user = User.query.filter_by(name=username).first()
+
+        # Add the user to the DB if the name is not taken
+        if not user:
+            # Create a new user
+            new_user = User(name=username, password=password)
+            # add user to DB
+            db.session.add(new_user)
+            db.session.commit()
+            flash('You Have Been Successfully Registered, Welcome!!')
+            # redirect to the login page
+            return redirect(url_for('login'))
 
     return render_template('register.html', js_file=js_file)
 
@@ -97,9 +104,19 @@ def newChannel():
     return render_template('newChannel.html', js_file=js_file)
 
 
-# @app.route("/channel/<String:name>")
-# @login_required
-# def channel(name):
+@app.route("/search", methods=['POST'])
+def search():
+    """This function will be used by the search bar on the home page to retrieve channel names actively"""
+
+    # Get the incoming text that the user is searching for
+    incoming = "%" + request.form.get("text") + "%"
+
+    q = Channel.query.filter(Channel.channel_name.ilike(incoming)).all()
+
+    for c in q:
+        print(c.channel_name)
+
+    return jsonify(incoming)
 
 
 @app.route("/myChannels")
